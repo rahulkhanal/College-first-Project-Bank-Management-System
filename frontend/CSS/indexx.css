@@ -23,20 +23,11 @@ ul {
 
 li a {
     padding: 1rem;
-    /* background-color: red; */
     display: block;
     text-decoration: none;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     color: white;
 }
-
-li a:hover {
-    background-color: #555;
-    color: white;
-}
- li a:focus{
-    background-color: red;
- }
 aside {
     width: calc(100% - 17%);
     position: absolute;
@@ -47,14 +38,15 @@ aside {
 
 .logo {
     height: auto;
-    margin-top: -3rem;
+    margin-top: 1rem;
     text-align: center;
     width: 100%;
 }
 
 .logo img {
-    width: 200px;
-    height: 200px;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
 }
 form{
     padding: 3rem;
@@ -85,4 +77,8 @@ form .btn button, form button{
 form .btn button:hover, form button:hover{
     color: white;
     background-color: #00754a;
+}
+
+.active-page{
+    background-color: #059862;
 }

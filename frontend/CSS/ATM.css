@@ -1,0 +1,50 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.ATM-outerlayor{
+    width: 100%;
+    height: 100vh;
+    background-color: #A1A3A1;
+}
+.ATM-outerlayor h1{
+    position: fixed;
+    top: 0;
+    border: 50px solid #A1A3A1;
+    border-top: 10px;
+    border-bottom:10px;
+    width: 100%;
+    font-size: 64px;
+    background-image: linear-gradient(to bottom, #0079FE, #0995e7);
+    color: #fff;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+.ATM-innerlayor{
+    height: 100%;
+    border: 50px solid #A1A3A1;
+    border-top: 0;
+    border-bottom: 0;
+    background-image: linear-gradient(to bottom, #58F6FF, #0086D2);
+
+}
+.ATM-innerlayor form{
+    height: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.ATM-innerlayor form input{
+    padding: 2rem;
+    font-size: 64px;
+    width: 80%;
+}
+.ATM-innerlayor form button{
+    padding: 2rem;
+    font-size: 64px;
+    width: 50%;
+    margin-top: 1rem;
+    cursor: pointer;
+}

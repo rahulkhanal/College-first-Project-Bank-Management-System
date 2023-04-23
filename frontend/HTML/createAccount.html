@@ -7,13 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-<link rel="stylesheet" href="./indexx.css">
+<link rel="stylesheet" href="../CSS/indexx.css">
 
 <body>
     <div class="createAccount">
         <nav>
             <div class="logo">
-                <img src="./image/logo.png" />
+                <img src="../image/logo.png" />
             </div>
             <ul>
                 <li><a href="./index.html">Home</a></li>
@@ -29,7 +29,8 @@
                 <div>
                     <label for="fName">Enter First Name</label>
                     <br />
-                    <input type="text" name="fName" placeholder="First Name" required />
+                    <input type="text" name="fName" placeholder="First Name" required id="createAcc-fname"
+                        value="Rahul" />
                 </div>
                 <div>
                     <label for="mName">Enter Middle Name</label>
@@ -100,12 +101,28 @@
                     <button class="generateAccount">Generate</button>
                 </div>
                 <div class="btn">
-                    <button type="submit">Create New Account</button>
+                    <button type="submit" id="createAccount-btn">Create New Account</button>
                 </div>
             </form>
         </aside>
     </div>
 </body>
-<script src="index.js"></script>
+<script>
+    const AccountNumber = document.querySelector(".account-number");
+    const generateAccount = document.querySelector(".generateAccount");
+    generateAccount.addEventListener("click", (e) => {
+        e.preventDefault();
+        let randomNumber = "";
+        let randomNumberArray = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F", "G"];
+        let length = randomNumberArray.length;
+        for (i = 0; i < length; i++) {
+            let index = Math.floor(Math.random() * length);
+            randomNumber = randomNumber + randomNumberArray[index]
+        }
+        AccountNumber.textContent = randomNumber
+        // generateAccount.disabled = true
+    })
+</script>
+<script src="../Js/index.js"></script>
 
 </html>
