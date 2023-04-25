@@ -55,8 +55,8 @@ form>div{
     margin-bottom: 1rem;
 }
 form input, select{
-    /* border-radius: 10px; */
-    /* border: 2px solid #059862; */
+    border: 2px solid gray;
+    border-radius: 4px;
     width: 100%;
     font-size: 1.1rem;
     padding: 0.5rem;
