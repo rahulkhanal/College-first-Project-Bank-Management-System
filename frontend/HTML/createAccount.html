@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Create Account</title>
 </head>
 <link rel="stylesheet" href="../CSS/indexx.css">
 <style>
@@ -27,11 +27,11 @@
         </nav>
         <aside>
             <form>
-                <h1 style="width: fit-content; margin: auto;">Create Account</h1>
-                <!-- <div>
+                <h1 style="width: fit-content; margin: auto; font-size: 2rem;">Create Account</h1>
+                <div>
                     <label for="fName">Enter First Name <b>(BLOCK LETTER)</b> </label>
                     <br />
-                    <input type="text" name="fName" placeholder="First Name" required id="fname" />
+                    <input type="text" name="fName" placeholder="First Name" required id="fName" />
                 </div>
                 <div>
                     <label for="mName">Enter Middle Name <b>(BLOCK LETTER)</b></label>
@@ -41,66 +41,66 @@
                 <div>
                     <label for="lName">Enter Last Name <b>(BLOCK LETTER)</b></label>
                     <br />
-                    <input type="text" name="lName" placeholder="Last Name" required id="lname" />
-                </div> -->
-                <div>
-                    <label for="citizennumber">Enter Citizenship Number</label>
-                    <br />
-                    <input type="number" id="citizennumber" placeholder="Enter Citizenship Number" required />
+                    <input type="text" name="lName" placeholder="Last Name" required id="lName" />
                 </div>
-                <!-- <div>
-                    <label for="fName">Enter Gender</label>
+                <div>
+                    <label for="citizennumber">Enter Citizenship Number <b>(XXX-XXXX...)</b></label>
                     <br />
-                    <select>
+                    <input type="text" id="citizennumber" placeholder="Enter Citizenship Number" required />
+                </div>
+                <div>
+                    <label for="gender">Enter Gender</label>
+                    <br />
+                    <select id="gender">
                         <option>Male</option>
                         <option>Female</option>
                         <option>Others</option>
                     </select>
                 </div>
                 <div>
-                    <label for="fName">Enter Contact Number</label>
+                    <label for="contact-number">Enter Contact Number <b>(98XXXXXXXX)</b></label>
                     <br />
-                    <input type="number" id="fName" placeholder="Contact Number" required />
+                    <input type="number" id="contact-number" placeholder="Contact Number" required />
                 </div>
                 <div>
-                    <label for="fName">Enter Address</label>
+                    <label for="Address">Enter Address</label>
                     <br />
-                    <input type="text" id="fName" placeholder="Address" required />
+                    <input type="text" id="Address" placeholder="Address" required />
                 </div>
                 <div style="width: 200px;">
                     <p">Enter Account Type</p>
                         <div style="display: flex;">
-                            <input type="radio" id="AccType" name="Account" value="Fixed Account" style="width: 1rem;">
-                            <label for="Fixed Account">Fixed Account</label>
+                            <input type="radio" id="Fixed-Account" name="Account" value="Fixed Account" style="width: 1rem;">
+                            <label for="Fixed-Account">Fixed Account</label>
                         </div>
                         <div style="display: flex;">
-                            <input type="radio" id="AccType" name="Account" value="Saving Account" style="width: 1rem;">
-                            <label for="Fixed Account">Saving Account</label>
+                            <input type="radio" id="Saving-Account" name="Account" value="Saving Account" style="width: 1rem;">
+                            <label for="Saving-Account">Saving Account</label>
                         </div>
                 </div>
                 <div>
-                    <label for="fName">Enter Starting Amount</label>
+                    <label for="Amount">Enter Starting Amount</label>
                     <br />
-                    <input type="number" id="fName" placeholder="Rs...." required />
+                    <input type="number" id="Amount" placeholder="Rs...." required />
                 </div>
                 <div>
-                    <label for="fName">Enter Customer Photo</label>
+                    <label for="file1">Enter Customer Photo</label>
                     <br />
-                    <input type="file" id="fName" required />
+                    <input type="file" id="file1" required />
                 </div>
                 <div>
-                    <label for="fName">Enter Document</label>
+                    <label for="file2">Enter Document</label>
                     <br />
-                    <input type="file" id="fName" required />
+                    <input type="file" id="file2" required />
                 </div>
                 <hr />
                 <br />
                 <div>
-                    <label for="fName">Generate Account Number:</label>
-                    <p class="account-number" style="color: red;"></p>
+                    <label for="generateAccount">Generate Account Number:</label>
+                    <p id="account-number" style="color: red;"></p>
                     <br />
-                    <button class="generateAccount">Generate</button>
-                </div> -->
+                    <button id="generateAccount">Generate</button>
+                </div>
                 <div class="btn">
                     <button type="submit" id="createAccount-btn">Create New Account</button>
                 </div>
@@ -113,9 +113,19 @@
         e.preventDefault()
         const nameregex = /[A-Z]{3,10}$/
         const middleNameRegex = /^([A-Z]{3})?$/
-        const first_name = document.getElementById('fname')
+        const citizennumberegex = /[0-9]{3}\-([0-9]+)/
+        const contactregec = /^98[0-9]{8}/
+        const Addressregex = /[A-Za-z]+\,[A-Za-z]+/
+        const amtregex = /^[0-9]+$/
+
+        const first_name = document.getElementById('fName')
         const middle_name = document.getElementById('mName')
-        const last_name = document.getElementById('lname')
+        const last_name = document.getElementById('lName')
+        const citizennumber = document.getElementById('citizennumber')
+        const contact = document.getElementById('contact-number')
+        const Address = document.getElementById('Address')
+        const Amount = document.getElementById('Amount')
+
         if (first_name.value) {
             if (!nameregex.test(first_name.value)) {
                 first_name.style.border = "2px solid red"
@@ -137,23 +147,51 @@
                 last_name.style.border = "2px solid green"
             }
         }
+        if (citizennumber.value) {
+            if (!citizennumberegex.test(citizennumber.value)) {
+                citizennumber.style.border = "2px solid red"
+            } else {
+                citizennumber.style.border = "2px solid green"
+            }
+        }
+        if (contact.value) {
+            if (!contactregec.test(contact.value)) {
+                contact.style.border = "2px solid red"
+            } else {
+                contact.style.border = "2px solid green"
+            }
+        }
+        if (Address.value) {
+            if (!Addressregex.test(Address.value)) {
+                Address.style.border = "2px solid red"
+            } else {
+                Address.style.border = "2px solid green"
+            }
+        }
+        if (Amount.value) {
+            if (!amtregex.test(Amount.value)) {
+                Amount.style.border = "2px solid red"
+            } else {
+                Amount.style.border = "2px solid green"
+            }
+        }
     })
 
 
-    // const AccountNumber = document.querySelector(".account-number");
-    // const generateAccount = document.querySelector(".generateAccount");
-    // generateAccount.addEventListener("click", (e) => {
-    //     e.preventDefault();
-    //     let randomNumber = "";
-    //     let randomNumberArray = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F", "G"];
-    //     let length = randomNumberArray.length;
-    //     for (i = 0; i < length; i++) {
-    //         let index = Math.floor(Math.random() * length);
-    //         randomNumber = randomNumber + randomNumberArray[index]
-    //     }
-    //     AccountNumber.textContent = randomNumber
-    //     generateAccount.disabled = true
-    // })
+    const AccountNumber = document.querySelector("#account-number");
+    const generateAccount = document.querySelector("#generateAccount");
+    generateAccount.addEventListener("click", (e) => {
+        e.preventDefault();
+        let randomNumber = "012";
+        let randomNumberArray = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F", "G"];
+        let length = randomNumberArray.length;
+        for (i = 0; i < length; i++) {
+            let index = Math.floor(Math.random() * length);
+            randomNumber = randomNumber + randomNumberArray[index]
+        }
+        AccountNumber.textContent = randomNumber
+        generateAccount.disabled = true 
+    })
 </script>
 <script src="../Js/index.js"></script>
 
