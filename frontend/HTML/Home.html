@@ -72,10 +72,10 @@
         <div class="logo">T<span style="color: #059862">M</span>S</div>
         <ul>
           <li><a href="./Home.html">Home</a></li>
-          <li><a href="./createAccount.html">Create Account</a></li>
-          <li><a href="./Deposite.html">Deposite</a></li>
-          <li><a href="./withdraw.html">Withdraw</a></li>
-          <li><a href="./manageacc.html">Manage Account</a></li>
+          <li><a href="./createUser.html">Create Users</a></li>
+          <li><a href="./createProject.html">Create Project</a></li>
+          <li><a href="./createTask.html">Create Task</a></li>
+          <li><a href="./Leave.html">Leave</a></li>
         </ul>
       </nav>
       <aside>
@@ -105,8 +105,28 @@
         clock_status.addEventListener("click", function () {
           endTime = new Date();
           window.localStorage.setItem("endTime", endTime);
-          window.localStorage.removeItem("startTime");
-          window.location.reload();
+          // window.localStorage.removeItem("startTime");
+          startTime=window.localStorage.getItem("startTime");
+          console.log(window.localStorage.getItem("endTime"));
+          fetch("http://localhost:3000/storeData", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              startTime: startTime,
+              endTime: endTime,
+            }),
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              console.log("Data stored in MySQL:", data);
+              window.localStorage.removeItem("startTime");
+              window.localStorage.removeItem("stickyNote");
+            })
+            .catch((error) => {
+              console.error("Error storing data in MySQL:", error);
+            });
         });
       } else {
         clock_status.childNodes[0].textContent = "CLOCK IN";
@@ -115,7 +135,7 @@
           clock_status.childNodes[0].textContent = "CLOCK IN";
           startTime = new Date();
           window.localStorage.setItem("startTime", startTime);
-          window.localStorage.removeItem("endTime");
+          // window.localStorage.removeItem("endTime");
           window.location.reload();
         });
       }
