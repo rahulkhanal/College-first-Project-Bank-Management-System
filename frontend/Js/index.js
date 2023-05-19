@@ -18,6 +18,7 @@
 // }
 
 var pathname = window.location.pathname;
+
 var abc = document.querySelectorAll("a");
 abc.forEach((item)=>{
     // console.log(item)

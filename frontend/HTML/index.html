@@ -1,38 +1,76 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+  <head>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            background-color: #eaf2f8;
+        }
+      .container {
+        width: 400px;
+        margin: 25vh auto;
+        padding: 20px;
+        background-color: #71b8ff;
+        color: white;
+        font-family: Arial, sans-serif;
+        height: 320px;
+        /* box-shadow: 0px 0px 8px #059862; */
+      }
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<link rel="stylesheet" href="../CSS/indexx.css">
+      h2 {
+        text-align: center;
+      }
 
-<body>
-    <div class="createAccount">
-        <nav>
-            <div class="logo">
-                <img src="../image/logo.png" />
-            </div>
-            <ul>
-                <li><a href="./index.html">Home</a></li>
-                <li><a href="./createAccount.html">Create Account</a></li>
-                <li><a href="./Deposite.html">Deposite</a></li> 
-                <li><a href="./withdraw.html">Withdraw</a></li>
-                <li><a href="./manageacc.html">Manage Account</a></li>  
-            </ul>
-        </nav>
-        <!-- <aside>
-            <div class="profile-img">
-                <img src="./image/profile.png" />
-            </div>
-            <form>
+      .form-group {
+        margin-bottom: 15px;
+      }
 
-            </form>
-        </aside> -->
+      label {
+        display: block;
+      }
+
+      input[type="text"],
+      input[type="password"] {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #059862;
+        border-radius: 4px;
+      }
+
+      input[type="submit"] {
+        background-color: #059862;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      input[type="submit"]:hover {
+        background-color: #048a53;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Sign In</h2>
+      <form>
+        <div class="form-group">
+          <label for="userid">User ID:</label>
+          <input type="text" id="userid" name="userid" required />
+        </div>
+        <div class="form-group">
+          <label for="password">Password:</label>
+          <input type="password" id="password" name="password" required />
+        </div>
+        <div class="form-group">
+          <input type="submit" value="Sign In" />
+        </div>
+      </form>
     </div>
-</body>
-<script src="../Js/index.js"></script>
-
+  </body>
 </html>
