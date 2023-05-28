@@ -16,7 +16,7 @@
   <body>
     <div class="createAccount">
       <nav>
-        <div class="logo">T<span style="color: #059862">M</span>S</div>
+        <div class="logo"><img src="./logo.png" alt=""></div>
         <ul>
           <li><a href="./Home.html">Home</a></li>
           <li><a href="./createUser.html">Create Users</a></li>
@@ -38,7 +38,7 @@
             <input
               type="text"
               name="fName"
-              placeholder="First Name"
+              placeholder="Full Name"
               required
               id="fName"
             />
@@ -69,6 +69,31 @@
             />
           </div>
           <div>
+            <label for="dept"
+              >Department Name <b>(BLOCK LETTER)</b><span id="span"></span> </b>
+            </label>
+            <br />
+            <input
+              type="text"
+              name="dept"
+              placeholder="First Name"
+              required
+              id="dept"
+            />
+          </div>
+          <div>
+            <label for="select"
+              >Role Type<span id="span"></span> </b>
+            </label>
+            <br />
+          <select name="select" id="select">
+            <option value="superadmin">Super Admin</option>
+            <option value="staff">Staff</option>
+          </select>
+          </div>
+          
+
+          <div>
             <label for="password">Enter Password</label>
             <br />
             <input type="text" id="password" placeholder="password" required />
@@ -89,10 +114,12 @@
     document.querySelector("form").addEventListener("submit", (e) => {
       var errcount = 0;
       e.preventDefault();
-      const nameregex = /[A-Z]{3,10}$/;
+      const nameregex = /^[A-Z]+\s[A-Z]+$/;
       const contactregec = /^98[0-9]{8}/;
+      const userIDregex = /^[a-z0-9]+$/;
       const first_name = document.getElementById("fName");
       const contact = document.getElementById("contact-number");
+      const uid = document.getElementById("uid");
 
       if (first_name.value) {
         if (!nameregex.test(first_name.value)) {
@@ -110,11 +137,28 @@
           contact.style.border = "2px solid green";
         }
       }
+      if (uid.value) {
+        if (!userIDregex.test(uid.value)) {
+          uid.style.border = "2px solid red";
+        } else {
+          uid.style.border = "2px solid green";
+        }
+      }
       if (
         nameregex.test(first_name.value) &&
-        contactregec.test(contact.value)
+        contactregec.test(contact.value) &&
+        userIDregex.test(uid.value)
       ) {
-        document.querySelector("form").reset();
+        fetch("http://localhost:7000/api/regester", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              startTime: startTime,
+              endTime: endTime,
+            })
+          });
       }
     });
 
