@@ -1,6 +1,6 @@
 const con = require("../Database/database");
 
-module.exports = officeTime = (req, resp) => {
+module.exports = AuthController = (req, resp) => {
   const { startTime, endTime } = req.body;
   console.log(startTime);
   console.log(endTime);
