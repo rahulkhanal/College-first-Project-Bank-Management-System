@@ -9,7 +9,7 @@ router.get("/", (req, resp) => {
   filePath = path.join(__dirname,"/frontend/HTML/index.html")
   resp.sendFile(filePath);
 });
-router.get("/home/:id", (req, resp) => {
+router.get("/home", (req, resp) => {
   filePath = path.join(__dirname,"/frontend/HTML/Home.html")
   resp.sendFile(filePath);
 });
