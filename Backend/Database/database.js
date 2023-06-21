@@ -4,7 +4,7 @@ const connection = mysql.createConnection({
   host: "localhost",
   user: "root",
   password: "",
-  database: "tms",
+  database: "tmsproject",
 });
 
 // Connect to the MySQL server
