@@ -11,6 +11,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "/Routes/view")));
 
+app.set("view engine", "hbs");
+app.set("views", "./Routes/View/HTML");
+
 app.use("/", router);
 
 app.listen(7000, () => {

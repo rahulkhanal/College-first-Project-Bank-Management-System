@@ -7,29 +7,43 @@ const autthentication = require("../middlewares/autthentication");
 const authorization = require("../middlewares/authorization");
 const router = express.Router();
 //all the file
-let filePath;
-router.get("/", (req, resp) => {
-  filePath = path.join(__dirname, "/view/HTML/index.html");
-  resp.sendFile(filePath);
+
+router.get("/", (req, res) => {
+  res.render("index");
 });
 router.get(
   "/home",
   autthentication,
   authorization("admin", "user"),
-  (req, resp) => {
-    filePath = path.join(__dirname, "/view/HTML/Home.html");
-    resp.sendFile(filePath);
+  (req, res) => {
+    res.render("Home");
   }
 );
-router.get("/createproject", (req, resp) => {
-  filePath = path.join(__dirname, "/view/HTML/createProject.html");
-  resp.sendFile(filePath);
+router.get("/createproject", (req, res) => {
+  res.render("createProject");
 });
-// router.post("/login", AuthController("admin"), (req, res) => {});
 
-router.get("/login", (req, resp) => {
-  const filepath = path.join(__dirname);
-});
+// let filePath;
+// router.get("/", (req, resp) => {
+//   filePath = path.join(__dirname, "/view/HTML/index.html");
+//   resp.sendFile(filePath);
+// });
+// router.get(
+//   "/home",
+//   autthentication,
+//   authorization("admin", "user"),
+//   (req, resp) => {
+//     filePath = path.join(__dirname, "/view/HTML/Home.html");
+//     resp.sendFile(filePath);
+//   }
+// );
+// router.get("/createproject", (req, resp) => {
+//   filePath = path.join(__dirname, "/view/HTML/createProject.html");
+//   resp.sendFile(filePath);
+// });
+// router.get("/login", (req, resp) => {
+//   const filepath = path.join(__dirname);
+// });
 
 //post method
 router.post("/login", login);
