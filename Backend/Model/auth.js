@@ -1,7 +1,7 @@
 const con = require("../Database/database");
 
 module.exports = {
-  Authorization: (data, cb) => {
+  checkAuth: (data, cb) => {
     const { email, password } = data;
     con.query("SELECT * FROM user WHERE Email = ?", [email], (err, res) => {
       if (err) {

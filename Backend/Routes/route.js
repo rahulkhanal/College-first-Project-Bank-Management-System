@@ -4,18 +4,23 @@ const officeTime = require("../Controller/officeTime");
 const path = require("path");
 const { login } = require("../Controller/login");
 const autthentication = require("../middlewares/autthentication");
+const authorization = require("../middlewares/authorization");
 const router = express.Router();
-
 //all the file
 let filePath;
 router.get("/", (req, resp) => {
   filePath = path.join(__dirname, "/view/HTML/index.html");
   resp.sendFile(filePath);
 });
-router.get("/home", autthentication, (req, resp) => {
-  filePath = path.join(__dirname, "/view/HTML/Home.html");
-  resp.sendFile(filePath);
-});
+router.get(
+  "/home",
+  autthentication,
+  authorization("admin", "user"),
+  (req, resp) => {
+    filePath = path.join(__dirname, "/view/HTML/Home.html");
+    resp.sendFile(filePath);
+  }
+);
 router.get("/createproject", (req, resp) => {
   filePath = path.join(__dirname, "/view/HTML/createProject.html");
   resp.sendFile(filePath);

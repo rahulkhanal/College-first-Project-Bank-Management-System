@@ -1,6 +1,7 @@
 module.exports = authenticate = (req, resp, next) => {
-  //   console.log(req);
-  if (req.cookies.email && req.cookies.password) {
+  const cookieDta = JSON.parse(req.cookies.credintial);
+  // console.log(cookieDta);
+  if (cookieDta[0].Email && cookieDta[0].Password) {
     next();
   } else {
     resp.redirect("/");
