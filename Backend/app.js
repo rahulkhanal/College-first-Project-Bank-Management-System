@@ -9,7 +9,8 @@ const path = require("path");
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, "/Routes/view")));
+app.use(express.static(path.join(__dirname, "/Routes/View/HTML")));
+app.use(express.static(path.join(__dirname, "/Routes/View")));
 
 app.set("view engine", "hbs");
 app.set("views", "./Routes/View/HTML");
