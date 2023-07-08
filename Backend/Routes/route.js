@@ -5,7 +5,7 @@ const path = require("path");
 const { login } = require("../Controller/login");
 const autthentication = require("../middlewares/autthentication");
 const authorization = require("../middlewares/authorization");
-const { createAccount, viewAccount, deleteAccount, searchAccount } = require("../Model/Account");
+const { createAccount, viewAccount, deleteAccount, searchAccount, updateAccount } = require("../Model/Account");
 const router = express.Router();
 //all the file
 
@@ -40,4 +40,7 @@ router.delete("/api/register/:id", deleteAccount);
 //post method
 router.post("/login", login);
 router.post("/storeTime", officeTime);
+
+//PUT method
+router.put("/api/updateAccount/:id", updateAccount)
 module.exports = router;

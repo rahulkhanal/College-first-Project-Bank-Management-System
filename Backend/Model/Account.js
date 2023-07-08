@@ -51,7 +51,39 @@ module.exports = {
         throw err;
       } else {
         if (res.length > 0) {
-          resp.render("updateUser", { data: res[0], id:id });
+          resp.render("updateUser", { data: res[0], id: id });
+        }
+      }
+    });
+  },
+  updateAccount: (req, resp) => {
+    const { name, contact, email, department, role, password } = req.body;
+    console.log("running");
+    const id = req.params.id;
+    console.log(id);
+    console.log(req.body);
+    con.query("SELECT Email FROM user WHERE Email = ?", email, (err, res) => {
+      if (err) {
+        throw err;
+      } else {
+        if (res.length > 0) {
+          resp.render("updateUser", { msg: true });
+        } else {
+          try{
+            con.query(
+              "UPDATE user SET Name = ?, Email = ?, Password = ?, Contact = ?, Department = ?, Role = ? WHERE Id = ?",
+              [name, email, password, contact, department, role, id],
+              (err, res2) => {
+                if (err) {
+                  throw err;
+                } else {
+                  console.log("updated");
+                }
+              }
+            );
+          }catch(e){
+            console.log(e);
+          }
         }
       }
     });
