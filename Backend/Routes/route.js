@@ -5,7 +5,7 @@ const path = require("path");
 const { login } = require("../Controller/login");
 const autthentication = require("../middlewares/autthentication");
 const authorization = require("../middlewares/authorization");
-const { createAccount, viewAccount } = require("../Model/createAccount");
+const { createAccount, viewAccount, deleteAccount, searchAccount } = require("../Model/Account");
 const router = express.Router();
 //all the file
 
@@ -26,31 +26,16 @@ router.get("/createUser", (req, res) => {
 router.get("/user", viewAccount, (req, res) => {
   res.render("user");
 });
+router.get("/updateUser/:id", searchAccount, (req,resp)=>{
+  resp.render("updateUser.hbs")
+})
 
 //post
 router.post("/api/register", createAccount);
 
-// let filePath;
-// router.get("/", (req, resp) => {
-//   filePath = path.join(__dirname, "/view/HTML/index.html");
-//   resp.sendFile(filePath);
-// });
-// router.get(
-//   "/home",
-//   autthentication,
-//   authorization("admin", "user"),
-//   (req, resp) => {
-//     filePath = path.join(__dirname, "/view/HTML/Home.html");
-//     resp.sendFile(filePath);
-//   }
-// );
-// router.get("/createproject", (req, resp) => {
-//   filePath = path.join(__dirname, "/view/HTML/createProject.html");
-//   resp.sendFile(filePath);
-// });
-// router.get("/login", (req, resp) => {
-//   const filepath = path.join(__dirname);
-// });
+
+//delete
+router.delete("/api/register/:id", deleteAccount);
 
 //post method
 router.post("/login", login);

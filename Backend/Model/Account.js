@@ -34,4 +34,26 @@ module.exports = {
       }
     });
   },
+  deleteAccount: (req, resp) => {
+    const id = req.params.id;
+    con.query("DELETE FROM user WHERE Id = ?", [id], (err, res) => {
+      if (err) {
+        throw err;
+      } else {
+        resp.render("user", { data: res });
+      }
+    });
+  },
+  searchAccount: (req, resp) => {
+    const id = req.params.id;
+    con.query("SELECT * FROM user WHERE Id = ?", [id], (err, res) => {
+      if (err) {
+        throw err;
+      } else {
+        if (res.length > 0) {
+          resp.render("updateUser", { data: res[0], id:id });
+        }
+      }
+    });
+  },
 };

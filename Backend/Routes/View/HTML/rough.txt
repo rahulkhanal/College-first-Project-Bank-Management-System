@@ -23,3 +23,6 @@
         contact.style.border = "2px solid red";
       } else { }
     }
+
+
+    'UPDATE user SET Name = ?, Email = ?, Password = ?, Contact = ?, Department = ?, Role = ? WHERE Id = ?
