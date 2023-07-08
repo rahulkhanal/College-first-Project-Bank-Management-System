@@ -1,0 +1,91 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <link rel="stylesheet" href="../CSS/indexx.css" />
+  <style>
+    body { background-color: #eaf2f8; }
+    table{
+        background-color: #fff;
+        width: 100%;
+        text-align: center;
+        border-collapse: collapse;
+    }
+    thead{
+        background-color: #FF3131;
+        color: #fff;
+    }
+    td,th{
+        padding: 1rem;
+
+    }
+    aside{
+        padding: 1rem;
+    }
+    td span{
+        display: flex;
+        justify-content: center;
+        gap: 7px;
+    }
+    button:first-child{
+        background-color: #71B8FF;
+        color: #eaf2f8;
+        border: none;
+        padding: 7px 13px;
+        cursor: pointer;
+    }
+    button:last-child{
+        background-color: #FF3131;
+        color: #eaf2f8;
+        border: none;
+        padding: 7px;
+        cursor: pointer;
+    }
+  </style>
+  <body>
+    <div class="user">
+      <nav>
+        <div class="logo"><img src="./logo.png" alt="" /></div>
+        <ul>
+          <li><a href="/home">Home</a></li>
+          <li><a href="./createUser">Create Users</a></li>
+          <li><a href="./user">User</a></li>
+          <li><a href="./createproject">Create Project</a></li>
+          <li><a href="./createTask">Create Task</a></li>
+          <li><a href="./Leave">Leave</a></li>
+        </ul>
+      </nav>
+      <aside>
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Password</th>
+              <th>Contact</th>
+              <th>Department</th>
+              <th>Role</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#data}}
+              <tr>
+                <td>{{Name}}</td>
+                <td>{{Email}}</td>
+                <td>{{Password}}</td>
+                <td>{{Contact}}</td>
+                <td>{{Department}}</td>
+                <td>{{Role}}</td>
+                <td><span><button>Edit</button><button>Delete</button></span></td>
+              </tr>
+            {{/data}}
+          </tbody>
+        </table>
+      </aside>
+    </div>
+  </body>
+  <script src="../Js/index.js"></script>
+</html>

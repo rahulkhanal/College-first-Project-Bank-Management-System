@@ -5,12 +5,12 @@ const path = require("path");
 const { login } = require("../Controller/login");
 const autthentication = require("../middlewares/autthentication");
 const authorization = require("../middlewares/authorization");
-const { createAccount } = require("../Model/createAccount");
+const { createAccount, viewAccount } = require("../Model/createAccount");
 const router = express.Router();
 //all the file
 
 router.get("/", (req, res) => {
-  res.render("index");
+  res.render("index.hbs");
 });
 router.get(
   "/home",
@@ -22,6 +22,9 @@ router.get(
 );
 router.get("/createUser", (req, res) => {
   res.render("createUser");
+});
+router.get("/user", viewAccount, (req, res) => {
+  res.render("user");
 });
 
 //post
