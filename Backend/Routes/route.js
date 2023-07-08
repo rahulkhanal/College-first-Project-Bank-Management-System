@@ -5,6 +5,7 @@ const path = require("path");
 const { login } = require("../Controller/login");
 const autthentication = require("../middlewares/autthentication");
 const authorization = require("../middlewares/authorization");
+const { createAccount } = require("../Model/createAccount");
 const router = express.Router();
 //all the file
 
@@ -19,9 +20,12 @@ router.get(
     res.render("Home");
   }
 );
-router.get("/createproject", (req, res) => {
-  res.render("createProject");
+router.get("/createUser", (req, res) => {
+  res.render("createUser");
 });
+
+//post
+router.post("/api/register", createAccount);
 
 // let filePath;
 // router.get("/", (req, resp) => {

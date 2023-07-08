@@ -20,12 +20,9 @@
 var pathname = window.location.pathname;
 
 var abc = document.querySelectorAll("a");
-abc.forEach((item)=>{
-    // console.log(item)
-    if(item.href.includes(pathname)){
-        item.classList.add("active-page")
-    }
-})
+abc.forEach((item) => {
+  if (item.href.includes(pathname)) {
+    item.classList.add("active-page");
+  }
+});
 //************************************************************ Create Account ****************************************************//
-
-

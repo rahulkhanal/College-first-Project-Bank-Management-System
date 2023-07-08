@@ -1,212 +1,130 @@
-<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Create Account</title>
-  </head>
-  <link rel="stylesheet" href="../CSS/indexx.css" />
-  <style>
-    body {
-      background-color: #eaf2f8;
-    }
-  </style>
 
-  <body>
-    <div class="createAccount">
-      <nav>
-        <div class="logo"><img src="./logo.png" alt=""></div>
-        <ul>
-          <li><a href="./Home.html">Home</a></li>
-          <li><a href="./createUser.html">Create Users</a></li>
-          <li><a href="./createProject.html">Create Project</a></li>
-          <li><a href="./createTask.html">Create Task</a></li>
-          <li><a href="./Leave.html">Leave</a></li>
-        </ul>
-      </nav>
-      <aside>
-        <form action="/register" method="post">
-          <h1 style="width: fit-content; margin: auto; font-size: 2rem">
-            Create User
-          </h1>
-          <div>
-            <label for="fName"
-              >Enter Name <b>(BLOCK LETTER) <span id="span"></span> </b>
-            </label>
-            <br />
-            <input
-              type="text"
-              name="fName"
-              placeholder="Full Name"
-              required
-              id="fName"
-            />
-          </div>
-          <div>
-            <label for="fName"
-              >User ID <b>(BLOCK LETTER) <span id="span"></span> </b>
-            </label>
-            <br />
-            <input
-              type="text"
-              name="fName"
-              placeholder="First Name"
-              required
-              id="uid"
-            />
-          </div>
-          <div>
-            <label for="contact-number"
-              >Enter Contact Number <b>(98XXXXXXXX)</b></label
-            >
-            <br />
-            <input
-              type="number"
-              id="contact-number"
-              placeholder="Contact Number"
-              required
-            />
-          </div>
-          <div>
-            <label for="dept"
-              >Department Name <b>(BLOCK LETTER)</b><span id="span"></span> </b>
-            </label>
-            <br />
-            <input
-              type="text"
-              name="dept"
-              placeholder="First Name"
-              required
-              id="dept"
-            />
-          </div>
-          <div>
-            <label for="select"
-              >Role Type<span id="span"></span> </b>
-            </label>
-            <br />
-          <select name="select" id="select">
-            <option value="superadmin">Super Admin</option>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Create Account</title>
+</head>
+<link rel="stylesheet" href="../CSS/indexx.css" />
+<style>
+  body {
+    background-color: #eaf2f8;
+  }
+</style>
+
+<body>
+  <div class="createAccount">
+    <nav>
+      <div class="logo"><img src="./logo.png" alt="" /></div>
+      <ul>
+        <li><a href="/Home">Home</a></li>
+        <li><a href="./createUser">Create Users</a></li>
+        <li><a href="./user">User</a></li>
+        <li><a href="./createproject">Create Project</a></li>
+        <li><a href="./createTask">Create Task</a></li>
+        <li><a href="./Leave">Leave</a></li>
+      </ul>
+    </nav>
+    <aside>
+      <form>
+        <h1 style="width: fit-content; margin: auto; font-size: 2rem">
+          Create User
+        </h1>
+        <div>
+          <label for="fName">Enter Name <b>(BLOCK LETTER) </b>
+          </label>
+          <br />
+          <input type="text" name="name" placeholder="Full Name" required id="fName" />
+        </div>
+        <div>
+          <label for="email">User ID
+          </label>
+          <br />
+          <input type="email" name="email" placeholder="First Name" required id="email" />
+        </div>
+        <div>
+          <label for="contact-number">Enter Contact Number <b>(98XXXXXXXX)</b></label>
+          <br />
+          <input type="number" id="contact-number" placeholder="Contact Number" required />
+        </div>
+        <div>
+          <label for="dept">Department Name<span id="span"></span> </b>
+          </label>
+          <br />
+          <select name="select" id="department">
+            <option value="Development">Development</option>
+            <option value="Designing">Designing</option>
+            <option value="Marketing">Marketing</option>
+          </select>
+        </div>
+        <div>
+          <label for="select">Role Type</b>
+          </label>
+          <br />
+          <select name="select" id="role">
+            <option value="superadmin">Admin</option>
             <option value="staff">Staff</option>
           </select>
-          </div>
-          
+        </div>
+        <div>
+          <label for="password">Enter Password</label>
+          <br />
+          <input type="text" id="password" placeholder="password" />
+        </div>
+        <div>
+          <button id="generateAccount">Generate Password</button>
+        </div>
+        <div class="btn">
+          <button id="createAccount-btn">
+            Create New Account
+          </button>
+        </div>
+      </form>
+    </aside>
+  </div>
+</body>
+<script src="../Js/index.js"></script>
+<script>
+  document.querySelector("#generateAccount").addEventListener("click", (e) => {
+    e.preventDefault();
+    let randomNumber = "";
+    let randomNumberArray = ["0", "1", "2", "3", "4", "5",
+      "6", "7", "8", "$", "+", "/", "^", "(", ")", "9", "A", "B", "C", "D", "E",
+      "F", "G", "/", "$", "+", "/", "^", "(", ")",];
+    let length = randomNumberArray.length; for (i = 0; i < length; i++) {
+      let index = Math.floor(Math.random() * length); randomNumber = randomNumber + randomNumberArray[index];
+    }
+    document.getElementById("password").value = randomNumber;
+    return
+  });
+  document.querySelector("#createAccount-btn").addEventListener("click", (e) => {
+    e.preventDefault();
+    const nameregex = /^[A-Z]+\s[A-Z]+$/;
+    const contactregec = /^98[0-9]{8}/;
+    const name = document.getElementById("fName").value;
+    const contact = document.getElementById("contact-number").value;
+    const email = document.querySelector("#email").value;
+    const department = document.querySelector("#department").value;
+    const role = document.querySelector("#role").value;
+    const password = document.querySelector("#password").value;
+    if (!nameregex.test(name) || !contactregec.test(contact)) {
+      alert("Validation Failed");
+    } else {
+      console.log(name, contact, email, department, role, password);
+      fetch("http://localhost:7000/api/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name, contact, email, email, department, role, password
+        }),
+      });
+      window.location.reload()
+    }
+  })
 
-          <div>
-            <label for="password">Enter Password</label>
-            <br />
-            <input type="text" id="password" placeholder="password" required />
-          </div>
-          <div>
-            <button id="generateAccount">Generate Password</button>
-          </div>
-          <div class="btn">
-            <button type="submit" id="createAccount-btn">
-              Create New Account
-            </button>
-          </div>
-        </form>
-      </aside>
-    </div>
-  </body>
-  <script>
-    document.querySelector("form").addEventListener("submit", (e) => {
-      var errcount = 0;
-      e.preventDefault();
-      const nameregex = /^[A-Z]+\s[A-Z]+$/;
-      const contactregec = /^98[0-9]{8}/;
-      const userIDregex = /^[a-z0-9]+$/;
-      const first_name = document.getElementById("fName");
-      const contact = document.getElementById("contact-number");
-      const uid = document.getElementById("uid");
+</script>
 
-      if (first_name.value) {
-        if (!nameregex.test(first_name.value)) {
-          first_name.style.border = "2px solid red";
-          document.getElementById("span").innerText = "*";
-          document.getElementById("span").style.color = "red";
-        } else {
-          first_name.style.border = "2px solid green";
-        }
-      }
-      if (contact.value) {
-        if (!contactregec.test(contact.value)) {
-          contact.style.border = "2px solid red";
-        } else {
-          contact.style.border = "2px solid green";
-        }
-      }
-      if (uid.value) {
-        if (!userIDregex.test(uid.value)) {
-          uid.style.border = "2px solid red";
-        } else {
-          // uid.style.border = "2px solid green";
-          return
-        }
-      }
-      if (
-        nameregex.test(first_name.value) &&
-        contactregec.test(contact.value) &&
-        userIDregex.test(uid.value)
-      ) {
-        fetch("http://localhost:7000/api/regester", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              startTime: startTime,
-              endTime: endTime,
-            })
-          });
-      }
-    });
-
-    const generateAccount = document.querySelector("#generateAccount");
-    generateAccount.addEventListener("click", (e) => {
-      e.preventDefault();
-      let randomNumber = "";
-      let randomNumberArray = [
-        "0",
-        "1",
-        "2",
-        "3",
-        "4",
-        "5",
-        "6",
-        "7",
-        "8",
-        "$",
-        "+",
-        "/",
-        "^",
-        "(",
-        ")",
-        "9",
-        "A",
-        "B",
-        "C",
-        "D",
-        "E",
-        "F",
-        "G",
-        "/",
-        "$",
-        "+",
-        "/",
-        "^",
-        "(",
-        ")",
-      ];
-      let length = randomNumberArray.length;
-      for (i = 0; i < length; i++) {
-        let index = Math.floor(Math.random() * length);
-        randomNumber = randomNumber + randomNumberArray[index];
-      }
-      console.log(randomNumber);
-      document.getElementById("password").value = randomNumber;
-    });
-  </script>
-  <script src="../Js/index.js"></script>
 </html>
