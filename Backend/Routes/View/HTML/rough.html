@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+</head>
+<link rel="stylesheet" href="../CSS/indexx.css" />
+<style>
+  body {
+    background-color: #eaf2f8;
+  }
+
+  .logo img {
+    width: 200px;
+  }
+</style>
+
+<body>
+  <div class="createAccount">
+    <nav>
+      <div class="logo">
+        <div class="logo"><img src="./logo.png" alt="" /></div>
+      </div>
+      <ul>
+        <li><a href="./home">Home</a></li>
+        <li><a href="./createuser">Create Users</a></li>
+        <li><a href="./user">User</a></li>
+        <li><a href="./createProject.html">Create Project</a></li>
+        <li><a href="./createTask.html">Create Task</a></li>
+        <li><a href="./Leave.html">Leave</a></li>
+      </ul>
+    </nav>
+    <aside>
+      <form class="Depositeform2">
+        <h1 style="width: fit-content; margin: auto">Create Project</h1>
+        <div>
+          <label for="fName">Project Name:</label>
+          <br />
+          <input type="text" name="fName" placeholder="Project Name" required id="fname" />
+        </div>
+        <div>
+          <label for="sdate">Start date:</label>
+          <br />
+          <input type="date" name="sdate" id="sdate" />
+        </div>
+        <div>
+          <label for="edate">End date:</label>
+          <br />
+          <input type="date" name="edate" id="edate" />
+        </div>
+        <div>
+          <label for="department">Department:</label>
+          <br>
+          <select name="department" id="department">
+            <option value="Developer">Developer</option>
+            <option value="Designer">Designing</option>
+            <option value="marketing">Marketing</option>
+            <option value="tester">Testing</option>
+          </select>
+        </div>
+
+        <div class="btn">
+          <!-- Corrected the onclick attribute to call the validateform function -->
+          <button onclick="validateform(event)">Create Project</button>
+        </div>
+      </form>
+    </aside>
+  </div>
+</body>
+<script src="../Js/index.js"></script>
+<script>
+  console.log("hiii")
+  function validateform(e) {
+    alert("I am clicked");
+    e.preventDefault();
+    var name = document.getElementById('fname').value;
+    var regex = /^[A-Za-z\s]+/;
+    var test = regex.test(name);
+    if (!test) {
+      alert("Validation failed");
+    }
+    else {
+      var sdate = document.getElementById('sdate').value;
+      var edate = document.getElementById('edate').value;
+      var department = document.getElementById('department').value;
+      console.log(name, sdate, edate, department); 
+    } 
+  }
+</script>
+
+</html>
