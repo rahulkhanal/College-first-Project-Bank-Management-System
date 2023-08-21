@@ -78,7 +78,7 @@
                         <th>Start_date</th>
                         <th>Deadline</th>
                         <th>Department</th>
-                        
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -109,7 +109,7 @@
         if (!confirmed) {
             return;
         }
-        fetch(`/api/register/${id}`, { method: 'DELETE' })
+        fetch(`/project/${id}`, { method: 'DELETE' })
             .then((response) => {
                 if (response.ok) {
                     window.location.reload()
@@ -126,7 +126,7 @@
         if (!confirmed) {
             return;
         }
-        window.location.href = `/updateUser/${id}`;
+        window.location.href = `/updateproject/${id}`;
     }
 </script>
 <script src="../Js/index.js"></script>

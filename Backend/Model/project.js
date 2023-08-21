@@ -22,9 +22,22 @@ module.exports = {
       );
     }),
   
+    searchProject: (req, resp) => {
+        const id = req.params.id;
+        connection.query("SELECT * FROM Project WHERE Id = ?", [id], (err, res) => {
+          if (err) {
+            throw err;
+          } else {
+            if (res.length > 0) {
+              resp.render("updateProject", { data: res[0], id: id });
+            }
+          }
+        });
+      },
+
     updateProject: (updateProject = (req, resp) => {
       const { name, start_date, end_date, department } = req.body;
-      const { id } = req.params.id;
+      const { id } = req.params;
       connection.query(
         "UPDATE Project SET Name=?,Start_date=?, End_date=?, Department=? WHERE Id=?",[
           name, start_date, end_date, department, id
@@ -46,13 +59,14 @@ module.exports = {
     }),
   
     deleteProject: (deleteProject = (req, resp) => {
-      const { name, start_date, end_date, department } = req.body;
-      const { id } = req.params.id;
-      connection.query("DELETE FROM Project WHERE id=? ", [id], (err, res) => {
+     
+      const { id } = req.params;
+      console.log(req.params);
+      connection.query("DELETE FROM Project WHERE Id=? ", [id], (err, res) => {
         if (err) {
           throw err;
         } else {
-          console.log("saira");
+          
           resp.status(200).json({
             msg: res,
           });

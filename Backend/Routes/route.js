@@ -8,7 +8,7 @@ const authorization = require("../middlewares/authorization");
 const { createAccount, viewAccount, deleteAccount, searchAccount, updateAccount } = require("../Model/Account");
 const router = express.Router();
 const { createProjectLayer, deleteProjectLayer, updateProjectLayer } = require("../Controller/projectLayer");
-const { readProject } = require("../Model/project");
+const { readProject, deleteProject, searchProject } = require("../Model/project");
 //all the file
 
 router.get("/", (req, res) => {
@@ -39,7 +39,9 @@ resp.render("createProject.hbs")
 router.get("/project", readProject,(req,resp)=>{
   resp.render("project.hbs")
   })
-
+router.get("/updateproject/:id", searchProject,(req,resp)=>{
+  resp.render("updateProject.hbs")
+})
 //post
 router.post("/api/register", createAccount);
 
@@ -53,9 +55,11 @@ router.post("/storeTime", officeTime);
 
 //PUT method
 router.put("/api/updateAccount/:id", updateAccount)
-module.exports = router;
+
  
-router.delete("/project/:id", deleteProjectLayer)
+router.delete("/project/:id", deleteProject)
 router.get("/project",readProject)
 router.post("/project", createProjectLayer)
 router.put("/project/:id", updateProjectLayer)
+
+module.exports = router;
