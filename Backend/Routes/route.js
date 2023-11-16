@@ -3,7 +3,7 @@ const officeTime = require("../Controller/officeTime");
 // const AuthController = require("../auth/auth");
 const path = require("path");
 const { login } = require("../Controller/login");
-const autthentication = require("../middlewares/autthentication");
+const authentication = require("../middlewares/autthentication");
 const authorization = require("../middlewares/authorization");
 const { createAccount, viewAccount, deleteAccount, searchAccount, updateAccount } = require("../Model/Account");
 const router = express.Router();
@@ -16,7 +16,7 @@ router.get("/", (req, res) => {
 });
 router.get(
   "/home",
-  autthentication,
+  authentication,
   authorization("admin", "user"),
   (req, res) => {
     res.render("Home");

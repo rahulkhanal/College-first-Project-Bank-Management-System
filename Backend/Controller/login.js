@@ -18,10 +18,6 @@ const login = (req, resp) => {
       //   maxAge: 1000000,
       //   httpOnly: true,
       // });
-      // await resp.status(200).json({
-      //   success: true,
-      //   data: result,
-      // });
       await resp.redirect("/Home");
     }
   });

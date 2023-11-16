@@ -4,11 +4,12 @@ module.exports = {
   createAccount: (req, resp) => {
     const { name, contact, email, department, role, password } = req.body;
     con.query("SELECT Email FROM user WHERE Email = ?", email, (err, res) => {
+      console.log(res.length);
       if (err) {
         throw err;
       } else {
         if (res.length > 0) {
-          resp.render("createUser", { msg: true });
+          resp.status(400).json({ message: "Email already exists" });
         } else {
           con.query(
             "INSERT INTO user(Name, Email, Password, Contact, Department, Role) VALUES(?,?,?,?,?,?)",
@@ -17,7 +18,9 @@ module.exports = {
               if (err) {
                 throw err;
               } else {
-                console.log(res);
+                resp
+                  .status(200)
+                  .json({ message: "Successfully created a user" });
               }
             }
           );
@@ -58,7 +61,6 @@ module.exports = {
   },
   updateAccount: (req, resp) => {
     const { name, contact, email, department, role, password } = req.body;
-    console.log("running");
     const id = req.params.id;
     console.log(id);
     console.log(req.body);
@@ -67,9 +69,9 @@ module.exports = {
         throw err;
       } else {
         if (res.length > 0) {
-          resp.render("updateUser", { msg: true });
+          resp.status(400).json({ message: "Email already exist" });
         } else {
-          try{
+          try {
             con.query(
               "UPDATE user SET Name = ?, Email = ?, Password = ?, Contact = ?, Department = ?, Role = ? WHERE Id = ?",
               [name, email, password, contact, department, role, id],
@@ -77,11 +79,13 @@ module.exports = {
                 if (err) {
                   throw err;
                 } else {
-                  console.log("updated");
+                  resp
+                    .status(200)
+                    .json({ message: "Successfully created a user" });
                 }
               }
             );
-          }catch(e){
+          } catch (e) {
             console.log(e);
           }
         }

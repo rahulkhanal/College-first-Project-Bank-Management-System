@@ -38,10 +38,10 @@
           <input type="text" name="name" placeholder="Full Name" required id="fName" />
         </div>
         <div>
-          <label for="email">User ID
+          <label for="email">Email
           </label>
           <br />
-          <input type="email" name="email" placeholder="First Name" required id="email" />
+          <input type="email" name="email" placeholder="Email" required id="email" />
         </div>
         <div>
           <label for="contact-number">Enter Contact Number <b>(98XXXXXXXX)</b></label>
@@ -63,7 +63,7 @@
           </label>
           <br />
           <select name="select" id="role">
-            <option value="superadmin">Admin</option>
+            <option value="admin">Admin</option>
             <option value="staff">Staff</option>
           </select>
         </div>
@@ -73,10 +73,10 @@
           <input type="text" id="password" placeholder="password" />
         </div>
         <div>
-          <button id="generateAccount">Generate Password</button>
+          <button type="button" id="generateAccount">Generate Password</button>
         </div>
         <div class="btn">
-          <button type="button" id="createAccount-btn">
+          <button type="submit" id="createAccount-btn">
             Create New Account
           </button>
         </div>
@@ -102,7 +102,7 @@
     document.getElementById("password").value = randomNumber;
     return
   });
-  document.querySelector("#createAccount-btn").addEventListener("click", (e) => {
+  document.querySelector("#createAccount-btn").addEventListener("click", async function (e) {
     e.preventDefault();
     const nameregex = /^[A-Z]+\s[A-Z]+$/;
     const contactregec = /^98[0-9]{8}/;
@@ -115,19 +115,23 @@
     if (!nameregex.test(name) || !contactregec.test(contact)) {
       alert("Validation Failed");
     } else {
-      console.log(name, contact, email, department, role, password);
-      fetch("http://localhost:7000/api/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name, contact, email, email, department, role, password
-        }),
-      });
+      try {
+        const response = await fetch("http://localhost:7000/api/register", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name, contact, email, department, role, password
+          }),
+        });
+        const errorData = await response.json();
+        alert(errorData.message)
+      } catch (err) {
+        alert("Something error occured")
+      }
     }
   })
 
 </script>
-
 </html>
