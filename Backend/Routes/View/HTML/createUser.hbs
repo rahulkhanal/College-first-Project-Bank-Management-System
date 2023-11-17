@@ -11,6 +11,38 @@
   body {
     background-color: #eaf2f8;
   }
+
+
+  .loader {
+    border: 3px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 3px solid #059862;
+    width: 23px;
+    height: 23px;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+  }
+
+  /* Safari */
+  @-webkit-keyframes spin {
+    0% {
+      -webkit-transform: rotate(0deg);
+    }
+
+    100% {
+      -webkit-transform: rotate(360deg);
+    }
+  }
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+
+    100% {
+      transform: rotate(360deg);
+    }
+  }
 </style>
 
 <body>
@@ -116,6 +148,7 @@
       alert("Validation Failed");
     } else {
       try {
+        document.querySelector("#createAccount-btn").innerHTML = `<div class="loader"></div>`
         const response = await fetch("http://localhost:7000/api/register", {
           method: "POST",
           headers: {
@@ -129,9 +162,12 @@
         alert(errorData.message)
       } catch (err) {
         alert("Something error occured")
+      } finally{
+        document.querySelector("#createAccount-btn").innerHTML = `Create New Account`
       }
     }
   })
 
 </script>
+
 </html>
