@@ -23,6 +23,7 @@ const {
   deleteProject,
   searchProject,
 } = require("../Model/project");
+const getProjectController = require("../Controller/project.controller");
 //all the file
 
 router.get("/", (req, res) => {
@@ -53,6 +54,12 @@ router.get("/project", readProject, (req, resp) => {
 });
 router.get("/updateproject/:id", searchProject, (req, resp) => {
   resp.render("updateProject.hbs");
+});
+
+//Task work
+router.get("/createTask", async (req, resp) => {
+  const result = await getProjectController();
+  resp.render("createTask.hbs", { result });
 });
 //post
 router.post("/api/register", createAccount);

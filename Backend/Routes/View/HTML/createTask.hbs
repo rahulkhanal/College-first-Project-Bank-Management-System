@@ -1,46 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <link rel="stylesheet" href="../CSS/indexx.css" />
 
-  <body>
-    <div class="createAccount">
-      <nav>
-        <div class="logo">
-          <div class="logo"><img src="./logo.png" alt=""></div>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+</head>
+<link rel="stylesheet" href="../CSS/indexx.css" />
+
+<body>
+  <div class="createAccount">
+    <nav>
+      <div class="logo">
+        <div class="logo"><img src="./logo.png" alt=""></div>
+      </div>
+      <ul>
+        <li><a href="/Home">Home</a></li>
+        <li><a href="./createUser">Create Users</a></li>
+        <li><a href="./user">User</a></li>
+        <li><a href="./createproject">Create Project</a></li>
+        <li><a href="./project">Project</a></li>
+        <li><a href="./createTask">Create Task</a></li>
+        <li><a href="./Leave">Leave</a></li>
+      </ul>
+    </nav>
+    <aside>
+      <form class="Depositeform1">
+        <h1 style="width: fit-content; margin: auto">Create Tasks</h1>
+        <div>
+          <label for="fName">Enter Task</label>
+          <br />
+          <input type="text" name="fName" placeholder="Task Name" required />
         </div>
-        <ul>
-          <li><a href="./Home.html">Home</a></li>
-          <li><a href="./createUser.html">Create Users</a></li>
-          <li><a href="./createProject.html">Create Project</a></li>
-          <li><a href="./createTask.html">Create Task</a></li>
-          <li><a href="./Leave.html">Leave</a></li>
-        </ul>
-      </nav>
-      <aside>
-        <form class="Depositeform1">
-          <h1 style="width: fit-content; margin: auto">Create Tasks</h1>
-          <div>
-            <label for="fName">Enter Task Name</label>
-            <br />
-            <input type="text" name="fName" placeholder="First Name" required />
-          </div>
-          <div>
-            <label for="mName">Enter Deadline</label>
-            <br />
-            <input type="date" name="mName" placeholder="Middle Name" />
-          </div>
-          <div class="btn">
-            <button type="submit">Submit</button>
-          </div>
-        </form>
-      </aside>
-    </div>
-  </body>
-  <script src="../Js/index.js"></script>
+
+        <div>
+          <label for="mName">Enter Deadline</label>
+          <br />
+          <input type="date" name="mName" placeholder="Middle Name" />
+        </div>
+        <div>
+          <label for="department">Department</label>
+          <br>
+          <select name="department" id="department">
+            <option value="Developer">Developer</option>
+            <option value="Designer">Designing</option>
+            <option value="Marketing">Marketing</option>
+            <option value="Testing">Testing</option>
+          </select>
+        </div>
+        <div>
+          <label for="department">Project</label>
+          <br>
+          {{#if result.length}}
+          <select name="department" id="department">
+            {{#each result}}
+            <option value="{{Name}}">{{Name}}</option>
+            {{/each}}
+          </select>
+          {{else}}
+          <select name="department" id="department">
+            <option value="" hidden>No project found</option>
+          </select>
+          {{/if}}
+        </div>
+        <div class="btn">
+          <button type="submit">Submit</button>
+        </div>
+      </form>
+    </aside>
+  </div>
+</body>
+<script src="../Js/index.js"></script>
+
 </html>
