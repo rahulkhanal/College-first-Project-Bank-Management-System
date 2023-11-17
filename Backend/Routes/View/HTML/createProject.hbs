@@ -15,6 +15,38 @@
   .logo img {
     width: 200px;
   }
+
+
+  .loader {
+    border: 3px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 3px solid #059862;
+    width: 23px;
+    height: 23px;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+  }
+
+  /* Safari */
+  @-webkit-keyframes spin {
+    0% {
+      -webkit-transform: rotate(0deg);
+    }
+
+    100% {
+      -webkit-transform: rotate(360deg);
+    }
+  }
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+
+    100% {
+      transform: rotate(360deg);
+    }
+  }
 </style>
 
 <body>
@@ -24,12 +56,13 @@
         <div class="logo"><img src="./logo.png" alt="" /></div>
       </div>
       <ul>
-        <li><a href="./home">Home</a></li>
-        <li><a href="./createuser">Create Users</a></li>
+        <li><a href="/Home">Home</a></li>
+        <li><a href="./createUser">Create Users</a></li>
         <li><a href="./user">User</a></li>
-        <li><a href="./createProject.html">Create Project</a></li>
-        <li><a href="./createTask.html">Create Task</a></li>
-        <li><a href="./Leave.html">Leave</a></li>
+        <li><a href="./createproject">Create Project</a></li>
+        <li><a href="./project">Project</a></li>
+        <li><a href="./createTask">Create Task</a></li>
+        <li><a href="./Leave">Leave</a></li>
       </ul>
     </nav>
     <aside>
@@ -50,7 +83,7 @@
           <br />
           <input type="date" name="edate" id="edate" />
         </div>
-        <div>
+        {{!-- <div>
           <label for="department">Department:</label>
           <br>
           <select name="department" id="department">
@@ -58,14 +91,11 @@
             <option value="Designer">Designing</option>
             <option value="Marketing">Marketing</option>
             <option value="Testing">Testing</option>
-
           </select>
-
-
-        </div>
+        </div> --}}
 
         <div class="btn">
-          <button onclick="validateform(event) " >Create Project</button>
+          <button id="createProject-btn" onclick="validateform(event)">Create Project</button>
         </div>
       </form>
     </aside>
@@ -73,10 +103,8 @@
 </body>
 <script src="../Js/index.js"></script>
 <script>
-  console.log("hiii")
-  function validateform(e) {
-    alert("I am clicked");
-     e.preventDefault();
+  async function validateform(e) {
+    e.preventDefault();
     var name = document.getElementById('fname').value;
     var regex = /^[A-Za-z\s]+/
     var test = regex.test(name);
@@ -84,21 +112,28 @@
       alert("Validation failed");
     }
     else {
-
-      var sdate = document.getElementById('sdate').value;
-      var edate = document.getElementById('edate').value;
-      var department = document.getElementById('department').value;
-      console.log(name, sdate, edate, department); 
-      fetch("http://localhost:7000/project", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name, start_date:sdate, end_date:edate ,department
-        }),
-      });
-    } 
+      try {
+        var sdate = document.getElementById('sdate').value;
+        var edate = document.getElementById('edate').value;
+        document.querySelector("#createProject-btn").innerHTML = `<div class="loader"></div>`
+        const response = await fetch("http://localhost:7000/project", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name, start_date: sdate, end_date: edate
+          }),
+        });
+        const errorData = await response.json();
+        alert(errorData.message)
+      } catch (e) {
+        console.log(e.message)
+        alert("Something error occured")
+      } finally {
+        document.querySelector("#createProject-btn").innerHTML = `Create Project`
+      }
+    }
   }
 </script>
 
