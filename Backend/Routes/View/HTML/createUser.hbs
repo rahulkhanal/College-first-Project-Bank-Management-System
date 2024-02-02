@@ -51,7 +51,9 @@
       <div class="logo"><img src="./logo.png" alt="" /></div>
       <ul>
         <li><a href="/Home">Home</a></li>
+        {{#if isAdmin}}
         <li><a href="./createUser">Create Users</a></li>
+        {{/if}}
         <li><a href="./user">User</a></li>
         <li><a href="./createproject">Create Project</a></li>
         <li><a href="./project">Project</a></li>
@@ -163,7 +165,7 @@
         alert(errorData.message)
       } catch (err) {
         alert("Something error occured")
-      } finally{
+      } finally {
         document.querySelector("#createAccount-btn").innerHTML = `Create New Account`
       }
     }

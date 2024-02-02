@@ -9,18 +9,24 @@ const login = (req, resp) => {
         msg: err.message,
       });
     } else {
+      console.log(result);
       await resp.cookie("credintial", JSON.stringify(result));
-      // await resp.cookie("email", data.email, {
-      //   maxAge: 1000000,
-      //   httpOnly: true,
-      // });
-      // await resp.cookie("password", data.password, {
-      //   maxAge: 1000000,
-      //   httpOnly: true,
-      // });
+
       await resp.redirect("/Home");
     }
   });
 };
 
+const logout = (req, resp) => {
+  resp.clearCookie("credential");
+};
 module.exports = { login };
+
+// await resp.cookie("email", data.email, {
+//   maxAge: 1000000,
+//   httpOnly: true,
+// });
+// await resp.cookie("password", data.password, {
+//   maxAge: 1000000,
+//   httpOnly: true,
+// });

@@ -32,12 +32,15 @@ router.get("/", (req, res) => {
 router.get(
   "/home",
   authentication,
-  authorization("admin", "user"),
+  authorization("admin", "staff"),
   (req, res) => {
-    res.render("Home");
+    const role = JSON.parse(req.cookies.credintial)[0].Role;
+    const isAdmin = role && role === "admin";
+    console.log("isAdmin", isAdmin);
+    res.render("Home", { isAdmin });
   }
 );
-router.get("/createUser", (req, res) => {
+router.get("/createUser", authorization("admin"), (req, res) => {
   res.render("createUser");
 });
 router.get("/user", viewAccount, (req, res) => {
