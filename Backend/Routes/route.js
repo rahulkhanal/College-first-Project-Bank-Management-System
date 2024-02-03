@@ -95,6 +95,8 @@ router.get(
   async (req, res) => {
     const taskId = req.params.id;
     try {
+      const role = JSON.parse(req.cookies.credintial)[0].Role;
+      const isAdmin = role && role === "admin";
       const result = await getProjectController();
       getTaskById(taskId, (err, task) => {
         if (err) {
@@ -102,7 +104,7 @@ router.get(
           res.status(500).send("Internal Server Error");
           return;
         }
-        res.render("update-task", { task, result });
+        res.render("update-task", { task, result, isAdmin });
       });
     } catch (error) {
       console.error("Error in route:", error);
@@ -144,10 +146,10 @@ router.get(
   "/updateproject/:id",
   authentication,
   authorization("admin"),
-  searchProject,
-  (req, resp) => {
-    resp.render("updateProject.hbs");
-  }
+  searchProject
+  // (req, resp) => {
+  //   resp.render("updateProject.hbs");
+  // }
 );
 
 router.get(

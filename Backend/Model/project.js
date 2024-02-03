@@ -18,12 +18,14 @@ module.exports = {
 
   searchProject: (req, resp) => {
     const id = req.params.id;
+    const role = JSON.parse(req.cookies.credintial)[0].Role;
+    const isAdmin = role && role === "admin";
     connection.query("SELECT * FROM Project WHERE Id = ?", [id], (err, res) => {
       if (err) {
         throw err;
       } else {
         if (res.length > 0) {
-          resp.render("updateProject", { data: res[0], id: id });
+          resp.render("updateProject", { data: res[0], id: id, isAdmin });
         }
       }
     });

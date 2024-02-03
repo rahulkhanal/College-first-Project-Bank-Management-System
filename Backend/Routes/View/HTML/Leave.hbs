@@ -1,57 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>All Accounts</title>
-    <link rel="stylesheet" href="../CSS/indexx.css" />
-    <style>
-      .searchbar {
-        display: flex;
-        justify-content: end;
-      }
-    </style>
-  </head>
 
-  <body>
-    <div class="createAccount">
-      <nav>
-        <div class="logo">
-            <div class="logo"><img src="./logo.png" alt=""></div>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>All Accounts</title>
+  <link rel="stylesheet" href="../CSS/indexx.css" />
+  <style>
+    .searchbar {
+      display: flex;
+      justify-content: end;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="createAccount">
+    <nav>
+      <div class="logo">
+        <div class="logo"><img src="./logo.png" alt=""></div>
+      </div>
+      <ul>
+        <li><a href="/Home">Home</a></li>
+        {{#if isAdmin}}
+        <li><a href="./createUser">Create Users</a></li>
+        {{/if}}
+        {{#if isAdmin}}
+        <li><a href="./user">User</a></li>
+        {{/if}}
+        {{#if isAdmin}}
+        <li><a href="./createproject">Create Project</a></li>
+        {{/if}}
+        <li><a href="./project">Project List</a></li>
+        <li><a href="./createTask">Create Task</a></li>
+        <li><a href="/task-list">Task List</a></li>
+      </ul>
+    </nav>
+    <aside>
+      <form class="Depositeform1">
+        <h1 style="width: fit-content; margin: auto">Create Tasks</h1>
+        <div>
+          <label for="fName">Enter Reason</label>
+          <br />
+          <input type="text" name="fName" placeholder="First Name" required />
         </div>
-        <ul>
-          <li><a href="./Home.html">Home</a></li>
-          <li><a href="./createUser.html">Create Users</a></li>
-          <li><a href="./createProject.html">Create Project</a></li>
-          <li><a href="./createTask.html">Create Task</a></li>
-          <li><a href="./Leave.html">Apply Leave</a></li>
-        </ul>
-      </nav>
-      <aside>
-        <form class="Depositeform1">
-          <h1 style="width: fit-content; margin: auto">Create Tasks</h1>
-          <div>
-            <label for="fName">Enter Reason</label>
-            <br />
-            <input type="text" name="fName" placeholder="First Name" required />
-          </div>
-          <div>
-            <label for="mName">Starting Date</label>
-            <br />
-            <input type="date" name="mName" placeholder="Middle Name" />
-          </div>
-          <div>
-            <label for="mName">Ending Date</label>
-            <br />
-            <input type="date" name="mName" placeholder="Middle Name" />
-          </div>
-          <div class="btn">
-            <button type="submit">Submit</button>
-          </div>
-        </form>
-      </aside>
-    </div>
-  </body>
-  <script src="../Js/index.js"></script>
+        <div>
+          <label for="mName">Starting Date</label>
+          <br />
+          <input type="date" name="mName" placeholder="Middle Name" />
+        </div>
+        <div>
+          <label for="mName">Ending Date</label>
+          <br />
+          <input type="date" name="mName" placeholder="Middle Name" />
+        </div>
+        <div class="btn">
+          <button type="submit">Submit</button>
+        </div>
+      </form>
+    </aside>
+  </div>
+</body>
+<script src="../Js/index.js"></script>
+
 </html>
