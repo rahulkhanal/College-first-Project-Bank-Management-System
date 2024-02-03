@@ -21,7 +21,7 @@
   <div class="createAccount">
     <nav>
       <div class="logo">
-        <div class="logo"><img src="./logo.png" alt="" /></div>
+        {{!-- <div class="logo  "><img src="./logo.png" alt="" /></div> --}}
       </div>
       <ul>
         <li><a href="./home">Home</a></li>
@@ -35,7 +35,7 @@
     <aside>
       <form class="Depositeform2">
         <h1 style="width: fit-content; margin: auto">Create Project</h1>
-         <input type="number" hidden id="id" value="{{data.Id}}">
+        <input type="number" hidden id="id" value="{{data.Id}}">
         <div>
           <label for="fName">Project Name:</label>
           <br />
@@ -49,7 +49,7 @@
         <div>
           <label for="edate">End date:</label>
           <br />
-          <input type="date" name="edate" id="edate"  value="{{data.End_date}}"/>
+          <input type="date" name="edate" id="edate" value="{{data.End_date}}" />
         </div>
         <div>
           <label for="department">Department:</label>
@@ -60,12 +60,24 @@
             <option value="Marketing">Marketing</option>
             <option value="Testing">Testing</option>
           </select>
-
-
         </div>
 
         <div class="btn">
-          <button onclick="validateform(event) " >Create Project</button>
+          <button onclick="validateform(event) ">Update Project</button>
+        </div>
+      </form>
+      <form action="/update-project-status" method="post">
+        <input type="number" name="id" hidden id="id" value="{{data.Id}}">
+        <div>
+          <label for="status">Status</label>
+          <br>
+          <select name="status" id="status">
+            <option value=1>Completed</option>
+            <option value=0>Running</option>
+          </select>
+        </div>
+        <div class="btn">
+          <button type="submit">Update Project</button>
         </div>
       </form>
     </aside>
@@ -75,8 +87,8 @@
 <script>
   console.log("hiii")
   function validateform(e) {
-    
-     e.preventDefault();
+
+    e.preventDefault();
     var name = document.getElementById('fname').value;
     var regex = /^[A-Za-z\s]+/
     var test = regex.test(name);
@@ -89,17 +101,17 @@
       var edate = document.getElementById('edate').value;
       var department = document.getElementById('department').value;
       const id = document.getElementById("id").value
-      console.log(name, sdate, edate, department); 
+      console.log(name, sdate, edate, department);
       fetch(`http://localhost:7000/project/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          name, start_date:sdate, end_date:edate ,department
+          name, start_date: sdate, end_date: edate, department
         }),
       });
-    } 
+    }
   }
 </script>
 

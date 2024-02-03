@@ -83,4 +83,21 @@ module.exports = {
       }
     });
   }),
+  updateProjectStatus: (req, resp) => {
+    const { id, status } = req.body;
+    connection.query(
+      "UPDATE Project SET status=? WHERE Id=?",
+      [status, id],
+      (err, res) => {
+        if (err) {
+          resp.json({
+            status: 500,
+            msg: err,
+          });
+        } else {
+          resp.redirect("/project");
+        }
+      }
+    );
+  },
 };

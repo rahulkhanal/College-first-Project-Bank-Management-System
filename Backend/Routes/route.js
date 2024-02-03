@@ -22,6 +22,7 @@ const {
   readProject,
   deleteProject,
   searchProject,
+  updateProjectStatus,
 } = require("../Model/project");
 const getProjectController = require("../Controller/project.controller");
 const {
@@ -77,7 +78,7 @@ router.get(
   "/user",
   authentication,
   authorization("admin"),
-  viewAccount,
+  viewAccount
   // async (req, res) => {
   //   const role = JSON.parse(req.cookies.credintial)[0].Role;
   //   const isAdmin = role && role === "admin";
@@ -128,11 +129,11 @@ router.get(
     resp.render("createProject.hbs", { isAdmin });
   }
 );
-router.get( 
+router.get(
   "/project",
   authentication,
   authorization("admin", "staff"),
-  readProject,
+  readProject
   // (req, resp) => {
   //   const role = JSON.parse(req.cookies.credintial)[0].Role;
   //   const isAdmin = role && role === "admin";
@@ -191,7 +192,7 @@ router.get("/leave", (req, res) => {
   console.log(req.cookies);
   // req.clearCookie("credintial");
 });
-
+router.post("/update-project-status", updateProjectStatus);
 //PUT method
 router.put("/api/updateAccount/:id", updateAccount);
 router.post("/update-task/:id", updateTask);
