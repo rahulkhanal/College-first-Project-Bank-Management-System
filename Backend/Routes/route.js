@@ -24,7 +24,11 @@ const {
   searchProject,
 } = require("../Model/project");
 const getProjectController = require("../Controller/project.controller");
-const { insertTask, getTask } = require("../Controller/task.controller");
+const {
+  insertTask,
+  getTask,
+  deleteTask,
+} = require("../Controller/task.controller");
 //all the file
 
 router.get("/", (req, res) => {
@@ -80,6 +84,8 @@ router.post("/api/register", createAccount);
 
 //delete
 router.delete("/api/register/:id", deleteAccount);
+router.delete("/api/delete-task/:id", deleteTask);
+router.delete("/project/:id", deleteProject);
 
 //post method
 router.post("/login", login);
@@ -93,7 +99,6 @@ router.get("/leave", (req, res) => {
 
 //PUT method
 router.put("/api/updateAccount/:id", updateAccount);
-router.delete("/project/:id", deleteProject);
 router.get("/project", readProject);
 router.post("/project", createProjectLayer);
 router.put("/project/:id", updateProjectLayer);

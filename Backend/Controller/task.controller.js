@@ -30,4 +30,23 @@ module.exports = {
       });
     });
   },
+  deleteTask: (req, resp) => {
+    return new Promise((resolve, reject) => {
+      try {
+        const taskId = req.params.id;
+        const sql = "DELETE FROM tasks WHERE id = ?";
+        connection.query(sql, [taskId], (err, res) => {
+          if (err) {
+            throw err;
+          } else {
+            resp.status(200).json({
+              msg: res,
+            });
+          }
+        });
+      } catch (error) {
+        console.log(error.messsage);
+      }
+    });
+  },
 };

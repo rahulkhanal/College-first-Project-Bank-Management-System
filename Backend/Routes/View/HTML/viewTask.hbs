@@ -90,8 +90,8 @@
                         <td>{{project}}</td>
                         <td>
                             <span>
-                                <button onclick="updateRecord(event, {{this.Id}})">Edit</button>
-                                <button onclick="deleteRecord(event, {{this.Id}})">Delete</button>
+                                <button onclick="updateRecord(event, {{this.id}})">Edit</button>
+                                <button onclick="deleteRecord(event, {{this.id}})">Delete</button>
                             </span>
                         </td>
                     </tr>
@@ -103,13 +103,14 @@
 </body>
 <script>
 
-    /*function deleteRecord(e, id) {
+    function deleteRecord(e, id) {
         const confirmed = confirm('Are you sure you want to delete this record?');
         if (!confirmed) {
             return;
         }
-        fetch(`/api/register/${id}`, { method: 'DELETE' })
+        fetch(`/api/delete-task/${id}`, { method: 'DELETE' })
             .then((response) => {
+                console.log(response)
                 if (response.ok) {
                     window.location.reload()
                 } else {
@@ -120,6 +121,7 @@
                 console.error('Error deleting record:', error);
             });
     }
+    /*
     function updateRecord(e, id) {
         const confirmed = confirm('Are you sure you want to Edit this record?');
         if (!confirmed) {
