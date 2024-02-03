@@ -30,6 +30,7 @@ const {
   deleteTask,
   updateTask,
   getTaskById,
+  getTaskUI,
 } = require("../Controller/task.controller");
 //all the file
 
@@ -77,13 +78,13 @@ router.get(
   authentication,
   authorization("admin"),
   viewAccount,
-  async (req, res) => {
-    const role = JSON.parse(req.cookies.credintial)[0].Role;
-    const isAdmin = role && role === "admin";
-    console.log(isAdmin, "I am");
-    const tasks = await getTask();
-    res.render("user", { tasks, isAdmin });
-  }
+  // async (req, res) => {
+  //   const role = JSON.parse(req.cookies.credintial)[0].Role;
+  //   const isAdmin = role && role === "admin";
+  //   console.log(isAdmin, "I am");
+  //   const tasks = await getTask();
+  //   res.render("user", { tasks, isAdmin });
+  // }
 );
 
 router.get(
@@ -127,16 +128,16 @@ router.get(
     resp.render("createProject.hbs", { isAdmin });
   }
 );
-router.get(
+router.get( 
   "/project",
   authentication,
   authorization("admin", "staff"),
   readProject,
-  (req, resp) => {
-    const role = JSON.parse(req.cookies.credintial)[0].Role;
-    const isAdmin = role && role === "admin";
-    resp.render("project.hbs", { isAdmin });
-  }
+  // (req, resp) => {
+  //   const role = JSON.parse(req.cookies.credintial)[0].Role;
+  //   const isAdmin = role && role === "admin";
+  //   resp.render("project.hbs", { isAdmin });
+  // }
 );
 router.get(
   "/updateproject/:id",
@@ -152,12 +153,13 @@ router.get(
   "/task-list",
   authentication,
   authorization("admin", "staff"),
+  getTaskUI
   // searchProject,
-  (req, resp) => {
-    const role = JSON.parse(req.cookies.credintial)[0].Role;
-    const isAdmin = role && role === "admin";
-    resp.render("viewTask.hbs"), { isAdmin };
-  }
+  // (req, resp) => {
+  //   const role = JSON.parse(req.cookies.credintial)[0].Role;
+  //   const isAdmin = role && role === "admin";
+  //   resp.render("viewTask.hbs"), { isAdmin };
+  // }
 );
 
 //Task work

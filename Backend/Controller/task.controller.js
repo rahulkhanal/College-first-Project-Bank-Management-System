@@ -1,4 +1,5 @@
 const connection = require("../Database/database");
+const getProjectController = require("./project.controller");
 module.exports = {
   insertTask: (req, resp) => {
     const taskName = req.body.fName;
@@ -37,14 +38,14 @@ module.exports = {
     const sql =
       "UPDATE tasks SET task_name = ?, deadline = ?, department = ?, project = ? WHERE id = ?";
     const values = [fName, mName, department, project, id];
-    connection.query(sql, values, (err, res) => { 
+    connection.query(sql, values, (err, res) => {
       if (err) {
         resp.json({
           status: 500,
           msg: err,
         });
       } else {
-        resp.redirect('/view-task')
+        resp.redirect("/view-task");
       }
     });
   },
@@ -75,6 +76,18 @@ module.exports = {
       } else {
         const task = results[0];
         callback(null, task);
+      }
+    });
+  },
+  getTaskUI: async (req, resp) => {
+    const role = JSON.parse(req.cookies.credintial)[0].Role;
+    const isAdmin = role && role === "admin";
+    connection.query("SELECT * FROM tasks ", (err, res) => {
+      console.log(res);
+      if (err) {
+        throw err;
+      } else {
+        resp.render("viewTask", { tasks: res, isAdmin });
       }
     });
   },

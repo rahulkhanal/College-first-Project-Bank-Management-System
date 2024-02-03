@@ -29,11 +29,13 @@ module.exports = {
     });
   },
   viewAccount: (req, resp) => {
+    const role = JSON.parse(req.cookies.credintial)[0].Role;
+    const isAdmin = role && role === "admin";
     con.query("SELECT * FROM user", (err, res) => {
       if (err) {
         throw err;
       } else {
-        resp.render("user", { data: res });
+        resp.render("user", { data: res, isAdmin });
       }
     });
   },

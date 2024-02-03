@@ -54,6 +54,22 @@
         padding: 7px;
         cursor: pointer;
     }
+
+    button:disabled {
+            {
+                {
+                !-- display: none;
+                --
+            }
+        }
+    }
+
+    .circle {
+        width: 15px;
+        height: 15px;
+        border: 1px solid #d3d3d3;
+        border-radius: 50%;
+    }
 </style>
 
 <body>
@@ -85,7 +101,10 @@
                         <th>Start_date</th>
                         <th>Deadline</th>
                         <th>Status</th>
+                        {{#if isAdmin}}
                         <th>Action</th>
+                        {{/if}}
+
                     </tr>
                 </thead>
                 <tbody>
@@ -96,23 +115,25 @@
                         <td>{{Start_date}}</td>
                         <td>{{End_date}}</td>
                         <td>
-                            {{#if this.status}}
-                            <input type="checkbox" checked>
+                            {{#if status}}
+                            <div class="circle" style="background-color: green;"></div>
                             {{else}}
-                            <input type="checkbox">
+                            <div class="circle" style="background-color: red;"></div>
                             {{/if}}
-
                         </td>
+                        {{#if showBtn}}
                         <td>
                             <span>
                                 <button onclick="updateRecord(event, {{this.Id}})">Edit</button>
                                 <button onclick="deleteRecord(event, {{this.Id}})">Delete</button>
                             </span>
                         </td>
+                        {{/if}}
                     </tr>
                     {{/data}}
                 </tbody>
             </table>
+
         </aside>
     </div>
 </body>

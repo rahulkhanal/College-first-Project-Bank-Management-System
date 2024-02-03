@@ -65,12 +65,21 @@ module.exports = {
     });
   }),
   readProject: (readProject = (req, resp) => {
+    const role = JSON.parse(req.cookies.credintial)[0].Role;
+
+    const isAdmin = role && role === "admin";
+
     connection.query("SELECT * FROM Project ", (err, res) => {
       if (err) {
         throw err;
       } else {
-        console.log(res);
-        resp.render("project", { data: res });
+        const data = res.map((item) => ({
+          ...item,
+          showBtn: isAdmin,
+        }));
+
+        resp.render("project", { data, isAdmin });
+        // resp.render("project", { data: { ...res, showBtn: isAdmin }, isAdmin });
       }
     });
   }),
