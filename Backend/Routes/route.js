@@ -24,6 +24,7 @@ const {
   searchProject,
 } = require("../Model/project");
 const getProjectController = require("../Controller/project.controller");
+const { insertTask, getTask } = require("../Controller/task.controller");
 //all the file
 
 router.get("/", (req, res) => {
@@ -35,13 +36,23 @@ router.get(
   authorization("admin", "staff"),
   (req, res) => {
     const role = JSON.parse(req.cookies.credintial)[0].Role;
+    const Name = JSON.parse(req.cookies.credintial)[0].Name;
     const isAdmin = role && role === "admin";
     console.log("isAdmin", isAdmin);
-    res.render("Home", { isAdmin });
+    res.render("Home", { isAdmin, Name });
   }
 );
 router.get("/createUser", authorization("admin"), (req, res) => {
   res.render("createUser");
+});
+router.get("/view-task", authorization("admin", "staff"), async (req, res) => {
+  try {
+    const tasks = await getTask();
+    res.render("viewTask", { tasks });
+  } catch (error) {
+    console.error("Error retrieving tasks:", error);
+    res.status(500).send("Internal Server Error");
+  }
 });
 router.get("/user", viewAccount, (req, res) => {
   res.render("user");
@@ -72,11 +83,16 @@ router.delete("/api/register/:id", deleteAccount);
 
 //post method
 router.post("/login", login);
+router.post("/task", insertTask);
 router.post("/storeTime", officeTime);
+router.get("/leave", (req, res) => {
+  res.clearCookie(req.cookies.credintial);
+  console.log(req.cookies);
+  // req.clearCookie("credintial");
+});
 
 //PUT method
 router.put("/api/updateAccount/:id", updateAccount);
-
 router.delete("/project/:id", deleteProject);
 router.get("/project", readProject);
 router.post("/project", createProjectLayer);

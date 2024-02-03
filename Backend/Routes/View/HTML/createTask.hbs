@@ -26,7 +26,7 @@
       </ul>
     </nav>
     <aside>
-      <form class="Depositeform1">
+      <form class="Depositeform1" method="post" action="/task">
         <h1 style="width: fit-content; margin: auto">Create Tasks</h1>
         <div>
           <label for="fName">Enter Task</label>
@@ -37,7 +37,7 @@
         <div>
           <label for="mName">Enter Deadline</label>
           <br />
-          <input type="date" name="mName" placeholder="Middle Name" />
+          <input type="date" name="mName" placeholder="Middle Name" required/>
         </div>
         <div>
           <label for="department">Department</label>
@@ -53,7 +53,7 @@
           <label for="department">Project</label>
           <br>
           {{#if result.length}}
-          <select name="department" id="department">
+          <select name="project" id="department">
             {{#each result}}
             <option value="{{Name}}">{{Name}}</option>
             {{/each}}
