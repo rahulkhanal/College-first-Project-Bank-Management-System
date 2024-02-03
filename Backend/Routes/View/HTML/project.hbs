@@ -62,12 +62,18 @@
             <div class="logo"><img src="./logo.png" alt="" /></div>
             <ul>
                 <li><a href="/Home">Home</a></li>
+                {{#if isAdmin}}
                 <li><a href="./createUser">Create Users</a></li>
+                {{/if}}
+                {{#if isAdmin}}
                 <li><a href="./user">User</a></li>
+                {{/if}}
+                {{#if isAdmin}}
                 <li><a href="./createproject">Create Project</a></li>
-                <li><a href="./project">Project</a></li>
+                {{/if}}
+                <li><a href="./project">Project List</a></li>
                 <li><a href="./createTask">Create Task</a></li>
-                <li><a href="./Leave">Leave</a></li>
+                <li><a href="./createTask">Task List</a></li>
             </ul>
         </nav>
         <aside>

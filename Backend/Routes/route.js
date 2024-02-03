@@ -28,6 +28,8 @@ const {
   insertTask,
   getTask,
   deleteTask,
+  updateTask,
+  getTaskById,
 } = require("../Controller/task.controller");
 //all the file
 
@@ -46,39 +48,130 @@ router.get(
     res.render("Home", { isAdmin, Name });
   }
 );
-router.get("/createUser", authorization("admin"), (req, res) => {
-  res.render("createUser");
-});
-router.get("/view-task", authorization("admin", "staff"), async (req, res) => {
-  try {
-    const tasks = await getTask();
-    res.render("viewTask", { tasks });
-  } catch (error) {
-    console.error("Error retrieving tasks:", error);
-    res.status(500).send("Internal Server Error");
+router.get(
+  "/createUser",
+  authentication,
+  authorization("admin"),
+  async (req, res) => {
+    const role = JSON.parse(req.cookies.credintial)[0].Role;
+    const isAdmin = role && role === "admin";
+    res.render("createUser", { isAdmin });
   }
-});
-router.get("/user", viewAccount, (req, res) => {
-  res.render("user");
-});
-router.get("/updateUser/:id", searchAccount, (req, resp) => {
-  resp.render("updateUser.hbs");
-});
-router.get("/createproject", (req, resp) => {
-  resp.render("createProject.hbs");
-});
-router.get("/project", readProject, (req, resp) => {
-  resp.render("project.hbs");
-});
-router.get("/updateproject/:id", searchProject, (req, resp) => {
-  resp.render("updateProject.hbs");
-});
+);
+router.get(
+  "/view-task",
+  authentication,
+  authorization("admin", "staff"),
+  async (req, res) => {
+    try {
+      const tasks = await getTask();
+      res.render("viewTask", { tasks });
+    } catch (error) {
+      console.error("Error retrieving tasks:", error);
+      res.status(500).send("Internal Server Error");
+    }
+  }
+);
+router.get(
+  "/user",
+  authentication,
+  authorization("admin"),
+  viewAccount,
+  async (req, res) => {
+    const role = JSON.parse(req.cookies.credintial)[0].Role;
+    const isAdmin = role && role === "admin";
+    console.log(isAdmin, "I am");
+    const tasks = await getTask();
+    res.render("user", { tasks, isAdmin });
+  }
+);
+
+router.get(
+  "/update-task/:id",
+  authentication,
+  authorization("admin", "staff"),
+  async (req, res) => {
+    const taskId = req.params.id;
+    try {
+      const result = await getProjectController();
+      getTaskById(taskId, (err, task) => {
+        if (err) {
+          console.error("Error getting task details:", err);
+          res.status(500).send("Internal Server Error");
+          return;
+        }
+        res.render("update-task", { task, result });
+      });
+    } catch (error) {
+      console.error("Error in route:", error);
+      res.status(500).send("Internal Server Error");
+    }
+  }
+);
+router.get(
+  "/updateUser/:id",
+  authentication,
+  authorization("admin"),
+  searchAccount,
+  (req, resp) => {
+    resp.render("updateUser.hbs");
+  }
+);
+router.get(
+  "/createproject",
+  authentication,
+  authorization("admin"),
+  (req, resp) => {
+    const role = JSON.parse(req.cookies.credintial)[0].Role;
+    const isAdmin = role && role === "admin";
+    resp.render("createProject.hbs", { isAdmin });
+  }
+);
+router.get(
+  "/project",
+  authentication,
+  authorization("admin", "staff"),
+  readProject,
+  (req, resp) => {
+    const role = JSON.parse(req.cookies.credintial)[0].Role;
+    const isAdmin = role && role === "admin";
+    resp.render("project.hbs", { isAdmin });
+  }
+);
+router.get(
+  "/updateproject/:id",
+  authentication,
+  authorization("admin"),
+  searchProject,
+  (req, resp) => {
+    resp.render("updateProject.hbs");
+  }
+);
+
+router.get(
+  "/task-list",
+  authentication,
+  authorization("admin", "staff"),
+  // searchProject,
+  (req, resp) => {
+    const role = JSON.parse(req.cookies.credintial)[0].Role;
+    const isAdmin = role && role === "admin";
+    resp.render("viewTask.hbs"), { isAdmin };
+  }
+);
 
 //Task work
-router.get("/createTask", async (req, resp) => {
-  const result = await getProjectController();
-  resp.render("createTask.hbs", { result });
-});
+router.get(
+  "/createTask",
+  authentication,
+  authorization("admin", "staff"),
+  async (req, resp) => {
+    const result = await getProjectController();
+    const role = JSON.parse(req.cookies.credintial)[0].Role;
+    const isAdmin = role && role === "admin";
+    resp.render("createTask.hbs", { result, isAdmin });
+  }
+);
 //post
 router.post("/api/register", createAccount);
 
@@ -99,6 +192,7 @@ router.get("/leave", (req, res) => {
 
 //PUT method
 router.put("/api/updateAccount/:id", updateAccount);
+router.post("/update-task/:id", updateTask);
 router.get("/project", readProject);
 router.post("/project", createProjectLayer);
 router.put("/project/:id", updateProjectLayer);

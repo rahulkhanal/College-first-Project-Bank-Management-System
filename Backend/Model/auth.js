@@ -3,17 +3,21 @@ const con = require("../Database/database");
 module.exports = {
   checkAuth: (data, cb) => {
     const { email, password } = data;
-    con.query("SELECT * FROM user WHERE Email = ?", [email], (err, res) => {
-      if (err) {
-        cb(err);
-      } else {
-        if (res.length !== 0) {
-          cb(null, res);
+    con.query(
+      "SELECT * FROM user WHERE Email = ? and Password = ?",
+      [email, password],
+      (err, res) => {
+        if (err) {
+          cb(err, null);
         } else {
-          return;
+          if (res.length !== 0) {
+            cb(null, res);
+          } else {
+            cb(err, null);
+          }
         }
       }
-    });
+    );
   },
 };
 

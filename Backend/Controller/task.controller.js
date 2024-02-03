@@ -30,6 +30,24 @@ module.exports = {
       });
     });
   },
+  updateTask: (req, resp) => {
+    const { id } = req.params;
+    const { fName, mName, department, project } = req.body;
+    console.log("from task controller", req.body);
+    const sql =
+      "UPDATE tasks SET task_name = ?, deadline = ?, department = ?, project = ? WHERE id = ?";
+    const values = [fName, mName, department, project, id];
+    connection.query(sql, values, (err, res) => { 
+      if (err) {
+        resp.json({
+          status: 500,
+          msg: err,
+        });
+      } else {
+        resp.redirect('/view-task')
+      }
+    });
+  },
   deleteTask: (req, resp) => {
     return new Promise((resolve, reject) => {
       try {
@@ -46,6 +64,17 @@ module.exports = {
         });
       } catch (error) {
         console.log(error.messsage);
+      }
+    });
+  },
+  getTaskById: (taskId, callback) => {
+    const sql = "SELECT * FROM tasks WHERE id = ?";
+    connection.query(sql, [taskId], (err, results) => {
+      if (err) {
+        callback(err, null);
+      } else {
+        const task = results[0];
+        callback(null, task);
       }
     });
   },

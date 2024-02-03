@@ -9,9 +9,7 @@ const login = (req, resp) => {
         msg: err.message,
       });
     } else {
-      console.log(result);
       await resp.cookie("credintial", JSON.stringify(result));
-
       await resp.redirect("/Home");
     }
   });

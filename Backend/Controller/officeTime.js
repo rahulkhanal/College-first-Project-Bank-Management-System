@@ -2,8 +2,7 @@ const con = require("../Database/database");
 
 module.exports = AuthController = (req, resp) => {
   const { startTime, endTime } = req.body;
-  console.log(startTime);
-  console.log(endTime);
+    console.log("object");
     const query = `INSERT INTO officetime (startTime, endTime) VALUES (?, ?)`;
     con.query(query, [startTime, endTime], (err, res) => {
       if (err) {
