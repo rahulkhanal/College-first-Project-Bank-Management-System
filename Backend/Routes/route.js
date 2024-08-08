@@ -172,6 +172,7 @@ router.get(
   authorization("admin", "staff"),
   async (req, resp) => {
     const result = await getProjectController();
+    console.log("result",result);
     const role = JSON.parse(req.cookies.credintial)[0].Role;
     const isAdmin = role && role === "admin";
     resp.render("createTask.hbs", { result, isAdmin });

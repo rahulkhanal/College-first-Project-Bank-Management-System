@@ -4,7 +4,7 @@ module.exports = {
     const { name, start_date, end_date } = req.body;
 
     connection.query(
-      "insert into Project(Name,Start_date,End_date)VALUES(?,?,?)",
+      "insert into project(Name,Start_date,End_date)VALUES(?,?,?)",
       [name, start_date, end_date],
       (err, res) => {
         if (err) {
@@ -20,7 +20,7 @@ module.exports = {
     const id = req.params.id;
     const role = JSON.parse(req.cookies.credintial)[0].Role;
     const isAdmin = role && role === "admin";
-    connection.query("SELECT * FROM Project WHERE Id = ?", [id], (err, res) => {
+    connection.query("SELECT * FROM project WHERE Id = ?", [id], (err, res) => {
       if (err) {
         throw err;
       } else {
@@ -35,7 +35,7 @@ module.exports = {
     const { name, start_date, end_date, department } = req.body;
     const { id } = req.params;
     connection.query(
-      "UPDATE Project SET Name=?,Start_date=?, End_date=?, Department=? WHERE Id=?",
+      "UPDATE project SET Name=?,Start_date=?, End_date=?, Department=? WHERE Id=?",
       [name, start_date, end_date, department, id],
       (err, res) => {
         if (err) {
@@ -56,7 +56,7 @@ module.exports = {
   deleteProject: (deleteProject = (req, resp) => {
     const { id } = req.params;
     console.log(req.params);
-    connection.query("DELETE FROM Project WHERE Id=? ", [id], (err, res) => {
+    connection.query("DELETE FROM project WHERE Id=? ", [id], (err, res) => {
       if (err) {
         throw err;
       } else {
@@ -71,7 +71,7 @@ module.exports = {
 
     const isAdmin = role && role === "admin";
 
-    connection.query("SELECT * FROM Project ", (err, res) => {
+    connection.query("SELECT * FROM project ", (err, res) => {
       if (err) {
         throw err;
       } else {
@@ -88,7 +88,7 @@ module.exports = {
   updateProjectStatus: (req, resp) => {
     const { id, status } = req.body;
     connection.query(
-      "UPDATE Project SET status=? WHERE Id=?",
+      "UPDATE project SET status=? WHERE Id=?",
       [status, id],
       (err, res) => {
         if (err) {
